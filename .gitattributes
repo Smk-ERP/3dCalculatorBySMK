@@ -1,0 +1,10 @@
+# Keep line endings stable so rebuilding index.html does not create
+# phantom diffs. build.ps1 always writes LF, so LF is the checkout format
+# for everything it reads or produces.
+* text=auto eol=lf
+
+# Windows batch files must keep CRLF or some multi-line constructs break.
+*.bat text eol=crlf
+
+# Vendored libraries - never touch them.
+lib/** -text
