@@ -63,3 +63,14 @@ $utf8 = New-Object System.Text.UTF8Encoding($false)
 
 $kb = [math]::Round((Get-Item $outPath).Length / 1KB)
 Write-Host "Built index.html  ($kb KB, fully self-contained)" -ForegroundColor Green
+
+# sop.html is already standalone - just copy it to the root so GitHub Pages
+# serves it alongside the app.
+$sopSrc = Join-Path $root "src\sop.html"
+$sopOut = Join-Path $root "sop.html"
+if (Test-Path $sopSrc) {
+    $sop = [System.IO.File]::ReadAllText($sopSrc, [System.Text.Encoding]::UTF8)
+    [System.IO.File]::WriteAllText($sopOut, $sop, $utf8)
+    $sopKb = [math]::Round((Get-Item $sopOut).Length / 1KB)
+    Write-Host "Copied sop.html   ($sopKb KB)" -ForegroundColor Green
+}

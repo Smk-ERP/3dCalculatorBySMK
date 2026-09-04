@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<title>SOP — ວິທີໃຊ້ເຄື່ອງຄິດໄລລາຄາພິມ 3D</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x1F4CB;</text></svg>">
+<style>
+:root{
+  --bg:#0f172a; --card:#1e293b; --br:rgba(51,65,85,.6);
+  --text:#f1f5f9; --muted:#94a3b8; --dim:#64748b;
+  --cyan:#22d3ee; --cyan-dk:#0891b2;
+  --green:#34d399; --amber:#fbbf24; --pink:#f472b6; --violet:#a78bfa;
+  --mono:ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:"Segoe UI","Noto Sans Lao","Phetsarath OT",-apple-system,Arial,sans-serif;
+  line-height:1.6; padding:32px 20px 64px;
+}
+.page{max-width:920px;margin:0 auto}
+
+/* ── Header ─────────────────────────────────────────── */
+.hero{
+  text-align:center; padding:36px 24px; border-radius:20px; margin-bottom:32px;
+  background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(167,139,250,.12));
+  border:1px solid rgba(34,211,238,.3);
+}
+.hero .eyebrow{
+  font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--cyan); font-weight:700; margin-bottom:10px;
+}
+.hero h1{font-size:clamp(24px,5vw,38px); font-weight:800; line-height:1.25}
+.hero p{color:var(--muted); margin-top:10px; font-size:15px}
+
+/* ── Section ────────────────────────────────────────── */
+.sec{margin-bottom:36px}
+.sec-title{
+  display:flex; align-items:center; gap:10px;
+  font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:16px;
+}
+.sec-title::after{content:"";flex:1;height:1px;background:var(--br)}
+
+/* ── Open-the-app cards ─────────────────────────────── */
+.ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.way{
+  background:var(--card); border:1px solid var(--br); border-radius:16px;
+  padding:20px; position:relative; overflow:hidden;
+}
+.way::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--cyan)}
+.way:nth-child(2)::before{background:var(--violet)}
+.way:nth-child(3)::before{background:var(--green)}
+.way .ico{font-size:26px;margin-bottom:8px;display:block}
+.way h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.way p{font-size:13px;color:var(--muted)}
+.way code{
+  display:block; margin-top:10px; font-family:var(--mono); font-size:11.5px;
+  background:rgba(15,23,42,.7); border:1px solid var(--br); border-radius:8px;
+  padding:8px 10px; color:var(--cyan); word-break:break-all;
+}
+
+/* ── Numbered steps ─────────────────────────────────── */
+.steps{position:relative;padding-left:8px}
+.step{display:flex;gap:18px;padding-bottom:26px;position:relative}
+.step:last-child{padding-bottom:0}
+.step::before{
+  content:"";position:absolute;left:21px;top:46px;bottom:0;width:2px;
+  background:linear-gradient(var(--br),transparent);
+}
+.step:last-child::before{display:none}
+.num{
+  flex:0 0 44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:17px;color:#0f172a;background:var(--cyan);
+  box-shadow:0 0 0 5px rgba(34,211,238,.13);
+}
+.step:nth-child(2) .num{background:var(--violet);box-shadow:0 0 0 5px rgba(167,139,250,.13)}
+.step:nth-child(3) .num{background:var(--green);box-shadow:0 0 0 5px rgba(52,211,153,.13)}
+.step:nth-child(4) .num{background:var(--amber);box-shadow:0 0 0 5px rgba(251,191,36,.13)}
+.step:nth-child(5) .num{background:var(--pink);box-shadow:0 0 0 5px rgba(244,114,182,.13)}
+.step-body{flex:1;background:var(--card);border:1px solid var(--br);border-radius:16px;padding:18px 20px}
+.step-body h3{font-size:17px;font-weight:700;margin-bottom:4px}
+.step-body .sub{font-size:13px;color:var(--dim);margin-bottom:12px}
+.step-body ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.step-body li{font-size:14px;color:#cbd5e1;padding-left:22px;position:relative}
+.step-body li::before{content:"→";position:absolute;left:0;color:var(--cyan);font-weight:700}
+.kbd{
+  display:inline-block;background:rgba(15,23,42,.8);border:1px solid var(--br);
+  border-radius:6px;padding:1px 7px;font-size:13px;font-weight:600;color:var(--text);
+}
+
+/* ── Field table ────────────────────────────────────── */
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:12px}
+.f{background:rgba(15,23,42,.55);border:1px solid var(--br);border-radius:10px;padding:9px 11px}
+.f b{display:block;font-size:13px;font-weight:600}
+.f span{font-size:11.5px;color:var(--dim)}
+
+/* ── Callout ────────────────────────────────────────── */
+.note{
+  display:flex;gap:12px;border-radius:12px;padding:13px 15px;margin-top:12px;
+  background:rgba(251,191,36,.11);border:1px solid rgba(251,191,36,.35);
+  font-size:13.5px;color:#fde68a;line-height:1.55;
+}
+.note.info{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.32);color:#a5f3fc}
+.note .i{flex:0 0 auto;font-size:16px;line-height:1.3}
+
+/* ── Formula ────────────────────────────────────────── */
+.formula{background:var(--card);border:1px solid var(--br);border-radius:16px;padding:22px}
+.formula svg{width:100%;height:auto;display:block}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin-top:18px}
+.lg{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--muted)}
+.dot{flex:0 0 auto;width:11px;height:11px;border-radius:3px;margin-top:4px}
+
+/* ── Storage ────────────────────────────────────────── */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.box{background:var(--card);border:1px solid var(--br);border-radius:16px;padding:18px 20px}
+.box h3{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.box ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.box li{font-size:13.5px;color:#cbd5e1;padding-left:18px;position:relative}
+.box li::before{content:"•";position:absolute;left:4px;color:var(--dim)}
+
+.foot{text-align:center;color:var(--dim);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--br)}
+.foot a{color:var(--cyan);text-decoration:none}
+
+/* ── Print ──────────────────────────────────────────── */
+@media print{
+  body{background:#fff;color:#0f172a;padding:0;font-size:11.5px}
+  .hero{background:#f0f9ff;border-color:#bae6fd}
+  .hero h1{color:#0f172a}
+  .way,.step-body,.formula,.box{background:#f8fafc;border-color:#cbd5e1;break-inside:avoid}
+  .step{break-inside:avoid}
+  .step-body li,.box li{color:#334155}
+  .note{background:#fffbeb;color:#92400e;border-color:#fcd34d}
+  .note.info{background:#f0f9ff;color:#075985;border-color:#7dd3fc}
+  .way code{background:#f1f5f9;color:#0e7490}
+  .sec{break-inside:avoid}
+  .foot{color:#64748b}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="eyebrow">SOP · ຂັ້ນຕອນການໃຊ້ງານ</div>
+    <h1>ເຄື່ອງຄິດໄລລາຄາພິມ 3D</h1>
+    <p>ຄູ່ມືການໃຊ້ງານ · SMK · ລາຄາທັງໝົດເປັນເງິນບາດໄທ (THB)</p>
+  </div>
+
+  <!-- ── OPEN ───────────────────────────────────────── -->
+  <div class="sec">
+    <div class="sec-title">🚪 ວິທີເປີດແອັບ — ເລືອກທາງໃດກໍໄດ້</div>
+    <div class="ways">
+      <div class="way">
+        <span class="ico">📱</span>
+        <h3>ໂທລະສັບ</h3>
+        <p>ເປີດ link ດ້ວຍ Chrome ແລ້ວກົດ <b>Share → Add to Home Screen</b> ຈະໄດ້ icon ຄືແອັບຈິງ</p>
+        <code>smk-erp.github.io/3dCalculatorBySMK/</code>
+      </div>
+      <div class="way">
+        <span class="ico">💻</span>
+        <h3>ຄອມພິວເຕີ</h3>
+        <p>ກົດ 2 ເທື່ອທີ່ປຸ່ມຢູ່ໜ້າ Desktop</p>
+        <code>Launch Calculator.bat</code>
+      </div>
+      <div class="way">
+        <span class="ico">✈️</span>
+        <h3>ບໍ່ມີອິນເຕີເນັດ</h3>
+        <p>ເປີດໄຟລ໌ໂດຍກົງ — ໃຊ້ໄດ້ປົກກະຕິທຸກຢ່າງ</p>
+        <code>D:\3D Print Calculater\index.html</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEPS ──────────────────────────────────────── -->
+  <div class="sec">
+    <div class="sec-title">📋 ຂັ້ນຕອນການໃຊ້ງານ</div>
+    <div class="steps">
+
+      <div class="step">
+        <div class="num">1</div>
+        <div class="step-body">
+          <h3>ຕັ້ງຄ່າເຄື່ອງພິມ</h3>
+          <div class="sub">ເຮັດເທື່ອດຽວຕໍ່ເຄື່ອງ · ຫຼັງຈາກນັ້ນບໍ່ຕ້ອງເຮັດອີກ</div>
+          <ul>
+            <li>ເລືອກເຄື່ອງພິມຈາກລາຍການ ແລ້ວກົດ <span class="kbd">✏️</span> ເພື່ອແກ້ໄຂ</li>
+            <li>ຫຼືກົດ <span class="kbd">+ ເພີ່ມເຄື່ອງພິມ</span> ຖ້າມີເຄື່ອງໃໝ່</li>
+          </ul>
+          <div class="fields">
+            <div class="f"><b>ກຳລັງໄຟ (W)</b><span>ເບິ່ງຈາກປ້າຍຫຼັງເຄື່ອງ</span></div>
+            <div class="f"><b>ຄ່າແຮງ / ວັນ</b><span>ຄ່າແຮງຄົນຄຸມເຄື່ອງ</span></div>
+            <div class="f"><b>ເສັ້ນໄຫມ / ກກ</b><span>ລາຄາທີ່ຊື້ຈິງ</span></div>
+            <div class="f"><b>ຄ່າໄຟ / kWh</b><span>ເບິ່ງຈາກໃບເກັບເງິນ</span></div>
+            <div class="f"><b>ຄ່າເສື່ອມ / ຊມ</b><span>ລາຄາເຄື່ອງ ÷ ຊົ່ວໂມງໃຊ້ງານ</span></div>
+            <div class="f"><b>% ສິ່ງເສດ</b><span>ເຜື່ອງານເສຍ / support</span></div>
+            <div class="f"><b>% ກຳໄລ</b><span>ກຳໄລທີ່ຕ້ອງການ</span></div>
+            <div class="f"><b>ຂະໜາດພິມ</b><span>ກວ້າງ×ຍາວ×ສູງ (ມມ)</span></div>
+          </div>
+          <div class="note">
+            <span class="i">⚠️</span>
+            <span>ຕົວເລກທີ່ມີມາໃຫ້ແຕ່ຕົ້ນເປັນ <b>ຄ່າສົມມຸດ ບໍ່ແມ່ນຕົວເລກຈິງ</b> — ຕ້ອງໃສ່ຂອງເຈົ້າເອງກ່ອນ ບໍ່ດັ່ງນັ້ນລາຄາທີ່ອອກມາຈະຜິດ.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div class="step-body">
+          <h3>ໃສ່ຂໍ້ມູນງານ</h3>
+          <div class="sub">ເຮັດທຸກຄັ້ງ ສຳລັບແຕ່ລະຊິ້ນສ່ວນ</div>
+          <ul>
+            <li><b>ຊື່ຊິ້ນສ່ວນ</b> — ເຊັ່ນ ຫົວ, ລຳຕົວ, ແຂນຊ້າຍ (ຈຳເປັນ ຕ້ອງໃສ່)</li>
+            <li><b>ນ້ຳໜັກ</b> ແລະ <b>ຊົ່ວໂມງພິມ</b> — copy ມາຈາກໂປຣແກຣມ slicer</li>
+            <li>ຄ່າເພີ່ມເຕີມ — ໃສ່ສະເພາະທີ່ມີ ບ່ອນໃດບໍ່ມີປະໄວ້ 0</li>
+          </ul>
+          <div class="fields">
+            <div class="f"><b>ຄ່າເກັບລາຍລະອຽດ</b><span>ຂັດ / ແຕ່ງຜິວ</span></div>
+            <div class="f"><b>ຄ່າເຮັດສີ</b><span>ພົ່ນ / ທາສີ</span></div>
+            <div class="f"><b>ຄ່າຂື້ນແບບ</b><span>ອອກແບບ 3D</span></div>
+            <div class="f"><b>ຄ່າສົ່ງ</b><span>ຂົນສົ່ງເຖິງລູກຄ້າ</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div class="step-body">
+          <h3>ບັນທຶກຊິ້ນສ່ວນ</h3>
+          <div class="sub">ລາຄາຄິດໄລ່ອັດຕະໂນມັດທັນທີ</div>
+          <ul>
+            <li>ເບິ່ງ <b>ລາຍລະອຽດຄ່າໃຊ້ຈ່າຍ</b> ແລະ <b>ລາຄາຂາຍ</b> ວ່າສົມເຫດສົມຜົນບໍ</li>
+            <li>ກົດ <span class="kbd">💾 ບັນທຶກຊິ້ນສ່ວນ</span></li>
+            <li>ຖ້າງານມີຫຼາຍຊິ້ນ — ກັບໄປຂັ້ນຕອນທີ 2 ເຮັດຊ້ຳຈົນຄົບ</li>
+          </ul>
+          <div class="note info">
+            <span class="i">💡</span>
+            <span>ປ່ຽນເຄື່ອງພິມໄດ້ລະຫວ່າງແຕ່ລະຊິ້ນ — ແຕ່ລະຊິ້ນຈື່ວ່າພິມດ້ວຍເຄື່ອງໃດ.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">4</div>
+        <div class="step-body">
+          <h3>ກວດສະຫຼຸບໂຄງການ</h3>
+          <div class="sub">ລວມທຸກຊິ້ນເຂົ້າກັນໃຫ້ອັດຕະໂນມັດ</div>
+          <ul>
+            <li>ເບິ່ງ <b>ນ້ຳໜັກລວມ · ຊົ່ວໂມງລວມ · ຄ່າໃຊ້ຈ່າຍລວມ · ລາຄາຂາຍລວມ</b></li>
+            <li>ຊິ້ນໃດຜິດ ກົດ <span class="kbd">✕</span> ລຶບສະເພາະຊິ້ນນັ້ນ ແລ້ວໃສ່ໃໝ່</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">5</div>
+        <div class="step-body">
+          <h3>ພິມໃບສະເໜີລາຄາ</h3>
+          <div class="sub">ສົ່ງໃຫ້ລູກຄ້າ ຫຼື ເກັບໄວ້ເປັນຫຼັກຖານ</div>
+          <ul>
+            <li>ກົດ <span class="kbd">🖨 ພິມໃບສະເໜີ</span> — ຈະເປີດໜ້າຕ່າງໃໝ່</li>
+            <li>ກົດ <span class="kbd">🖨️ Print / Save PDF</span></li>
+            <li>ເລືອກ <b>Save as PDF</b> ເພື່ອເກັບເປັນໄຟລ໌ ຫຼືເລືອກເຄື່ອງພິມເພື່ອພິມອອກ</li>
+            <li>ຈົບງານແລ້ວ ກົດ <span class="kbd">ລຶບທັງໝົດ</span> ເພື່ອເລີ່ມງານໃໝ່</li>
+          </ul>
+          <div class="note">
+            <span class="i">📌</span>
+            <span>ບັນທຶກ PDF ໄວ້ທຸກເທື່ອ — ນີ້ຄືວິທີດຽວທີ່ຈະເກັບຂໍ້ມູນງານໄວ້ຖາວອນ.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FORMULA ────────────────────────────────────── -->
+  <div class="sec">
+    <div class="sec-title">🧮 ສູດຄິດໄລ່ — ລາຄາມາຈາກໃສ</div>
+    <div class="formula">
+      <svg viewBox="0 0 860 330" role="img" aria-label="ແຜນວາດສູດຄິດໄລ່ລາຄາ">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+          </marker>
+        </defs>
+
+        <!-- inputs -->
+        <g font-size="12.5" font-family="Segoe UI, Noto Sans Lao, Arial">
+          <rect x="8"   y="14"  width="176" height="30" rx="7" fill="#0e7490" opacity=".22" stroke="#22d3ee" stroke-width="1"/>
+          <text x="20"  y="33"  fill="#a5f3fc">ຄ່າວັດສະດຸ = ນ້ຳໜັກ × ລາຄາໄຫມ</text>
+
+          <rect x="8"   y="52"  width="176" height="30" rx="7" fill="#0e7490" opacity=".22" stroke="#22d3ee" stroke-width="1"/>
+          <text x="20"  y="71"  fill="#a5f3fc">ຄ່າໄຟ = ວັດ × ຊົ່ວໂມງ × ຄ່າໄຟ</text>
+
+          <rect x="8"   y="90"  width="176" height="30" rx="7" fill="#0e7490" opacity=".22" stroke="#22d3ee" stroke-width="1"/>
+          <text x="20"  y="109" fill="#a5f3fc">ຄ່າແຮງ = (ຄ່າແຮງວັນ÷8) × ຊມ</text>
+
+          <rect x="8"   y="128" width="176" height="30" rx="7" fill="#0e7490" opacity=".22" stroke="#22d3ee" stroke-width="1"/>
+          <text x="20"  y="147" fill="#a5f3fc">ຄ່າເສື່ອມ = ຄ່າເສື່ອມ/ຊມ × ຊມ</text>
+
+          <rect x="8"   y="176" width="176" height="30" rx="7" fill="#a78bfa" opacity=".2" stroke="#a78bfa" stroke-width="1"/>
+          <text x="20"  y="195" fill="#ddd6fe">ຄ່າເກັບລາຍລະອຽດ</text>
+
+          <rect x="8"   y="214" width="176" height="30" rx="7" fill="#a78bfa" opacity=".2" stroke="#a78bfa" stroke-width="1"/>
+          <text x="20"  y="233" fill="#ddd6fe">ຄ່າເຮັດສີ</text>
+
+          <rect x="8"   y="252" width="176" height="30" rx="7" fill="#a78bfa" opacity=".2" stroke="#a78bfa" stroke-width="1"/>
+          <text x="20"  y="271" fill="#ddd6fe">ຄ່າຂື້ນແບບ</text>
+
+          <rect x="8"   y="290" width="176" height="30" rx="7" fill="#a78bfa" opacity=".2" stroke="#a78bfa" stroke-width="1"/>
+          <text x="20"  y="309" fill="#ddd6fe">ຄ່າສົ່ງ</text>
+        </g>
+
+        <path d="M188 167 L232 167" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" fill="none"/>
+
+        <!-- base -->
+        <rect x="238" y="140" width="150" height="54" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.4"/>
+        <text x="313" y="163" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="700" font-family="Segoe UI, Noto Sans Lao, Arial">ຄ່າພື້ນຖານ</text>
+        <text x="313" y="181" text-anchor="middle" fill="#94a3b8" font-size="11.5" font-family="Segoe UI, Noto Sans Lao, Arial">ບວກກັນທັງໝົດ</text>
+
+        <path d="M392 167 L436 167" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" fill="none"/>
+
+        <!-- waste -->
+        <rect x="442" y="140" width="150" height="54" rx="10" fill="#78350f" opacity=".45" stroke="#fbbf24" stroke-width="1.4"/>
+        <text x="517" y="163" text-anchor="middle" fill="#fde68a" font-size="14" font-weight="700" font-family="Segoe UI, Noto Sans Lao, Arial">+ ຄ່າສິ່ງເສດ</text>
+        <text x="517" y="181" text-anchor="middle" fill="#fcd34d" font-size="11.5" font-family="Segoe UI, Noto Sans Lao, Arial">× % ສິ່ງເສດ</text>
+
+        <path d="M596 167 L640 167" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" fill="none"/>
+
+        <!-- total -->
+        <rect x="646" y="112" width="150" height="48" rx="10" fill="#334155" stroke="#94a3b8" stroke-width="1.4"/>
+        <text x="721" y="141" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="700" font-family="Segoe UI, Noto Sans Lao, Arial">ຄ່າລວມ (ຕົ້ນທຶນ)</text>
+
+        <path d="M721 164 L721 190" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" fill="none"/>
+
+        <!-- selling -->
+        <rect x="638" y="196" width="166" height="62" rx="12" fill="#0e7490" opacity=".33" stroke="#22d3ee" stroke-width="2"/>
+        <text x="721" y="220" text-anchor="middle" fill="#67e8f9" font-size="14" font-weight="800" font-family="Segoe UI, Noto Sans Lao, Arial">ລາຄາຂາຍ</text>
+        <text x="721" y="239" text-anchor="middle" fill="#a5f3fc" font-size="11.5" font-family="Segoe UI, Noto Sans Lao, Arial">× (1 + % ກຳໄລ)</text>
+        <text x="721" y="253" text-anchor="middle" fill="#a5f3fc" font-size="11.5" font-family="Segoe UI, Noto Sans Lao, Arial">ປັດຂຶ້ນເປັນ 10 ບາດ</text>
+      </svg>
+
+      <div class="legend">
+        <div class="lg"><span class="dot" style="background:#22d3ee"></span><span>ຄິດໄລ່ອັດຕະໂນມັດຈາກຂໍ້ມູນເຄື່ອງພິມ + ນ້ຳໜັກ + ຊົ່ວໂມງ</span></div>
+        <div class="lg"><span class="dot" style="background:#a78bfa"></span><span>ຄ່າທີ່ເຈົ້າໃສ່ເອງແຕ່ລະງານ</span></div>
+        <div class="lg"><span class="dot" style="background:#fbbf24"></span><span>ບວກເຜື່ອງານເສຍ ຕາມ % ທີ່ຕັ້ງໄວ້</span></div>
+        <div class="lg"><span class="dot" style="background:#67e8f9"></span><span>ຕົວເລກສຸດທ້າຍທີ່ສະເໜີລູກຄ້າ</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STORAGE ────────────────────────────────────── -->
+  <div class="sec">
+    <div class="sec-title">💾 ຂໍ້ມູນເກັບຢູ່ໃສ — ສິ່ງທີ່ຕ້ອງລະວັງ</div>
+    <div class="grid2">
+      <div class="box">
+        <h3>✅ ເຮັດແບບນີ້</h3>
+        <ul>
+          <li>ພິມໃບສະເໜີເປັນ PDF ເກັບໄວ້ທຸກງານ</li>
+          <li>ໃສ່ຕົວເລກຈິງຂອງເຄື່ອງກ່ອນເລີ່ມໃຊ້</li>
+          <li>ກວດລາຄາຂາຍວ່າສົມເຫດສົມຜົນກ່ອນສົ່ງລູກຄ້າ</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>⚠️ ຂໍ້ຄວນລະວັງ</h3>
+        <ul>
+          <li>ຂໍ້ມູນເກັບໃນ browser ຂອງແຕ່ລະເຄື່ອງ <b>ແຍກກັນ</b> — ຕັ້ງໃນຄອມ ຈະບໍ່ໄປປາກົດຢູ່ໂທລະສັບ</li>
+          <li>ລ້າງ browser data = ເຄື່ອງພິມ ແລະ ຊິ້ນສ່ວນທີ່ບັນທຶກຈະຫາຍໝົດ</li>
+          <li>ບໍ່ມີການ sync ຂ້າມເຄື່ອງ ແລະ ບໍ່ມີການ backup ອັດຕະໂນມັດ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    SMK · ເຄື່ອງຄິດໄລລາຄາພິມ 3D<br>
+    <a href="index.html">← ກັບໄປໜ້າເຄື່ອງຄິດໄລ່</a>
+  </div>
+
+</div>
+</body>
+</html>
