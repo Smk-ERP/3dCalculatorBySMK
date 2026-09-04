@@ -1,8 +1,9 @@
 # ─────────────────────────────────────────────────────────────────────────────
 #  build.ps1 — bundles src\ + lib\ into a single self-contained index.html
 #
-#  Run:  powershell -ExecutionPolicy Bypass -File "D:\3D Print Calculater\build.ps1"
-#  Or just double-click Rebuild.bat
+#  Run:  double-click Rebuild.bat  (or run this file directly)
+#  Paths are resolved from this script's own location, so the whole
+#  project folder can be moved or renamed without breaking anything.
 #
 #  The output index.html needs NO internet and NO web server.
 # ─────────────────────────────────────────────────────────────────────────────

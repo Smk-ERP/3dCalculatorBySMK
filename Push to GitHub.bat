@@ -1,6 +1,6 @@
 @echo off
 setlocal
-cd /d "D:\3D Print Calculater"
+cd /d "%~dp0"
 
 echo ==========================================================
 echo   Push 3D Print Calculator to GitHub
