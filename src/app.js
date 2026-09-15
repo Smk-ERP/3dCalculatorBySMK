@@ -182,14 +182,44 @@
 
   function JobInput(props) {
     var type = props.type || 'number';
+
+    // The field keeps what the user typed as a string. If we fed the parsed
+    // number straight back into value=, clearing the box would snap it to "0"
+    // and typing "5" would produce "05". The parent only ever sees a number.
+    var st = useState(String(props.value));
+    var text = st[0], setText = st[1];
+
+    function toNumber(s) {
+      var n = parseFloat(s);
+      return isNaN(n) ? 0 : n;
+    }
+
+    // Resync when the parent changes the value from outside (e.g. partName
+    // is cleared after saving a part) without clobbering in-progress typing
+    // like "" or "0." that already mean the same number.
+    useEffect(function () {
+      if (type === 'text') { if (props.value !== text) setText(props.value); return; }
+      if (toNumber(text) !== props.value) setText(String(props.value));
+    }, [props.value]);
+
+    function onChange(e) {
+      var v = e.target.value;
+      if (type === 'text') { setText(v); props.onChange(v); return; }
+      // "05" -> "5", but leave "0." and "0" alone.
+      v = v.replace(/^0+(?=\d)/, '');
+      setText(v);
+      props.onChange(toNumber(v));
+    }
+
+    // Clicking into a box that shows 0 selects it, so typing replaces it.
+    function onFocus(e) { if (type !== 'text') e.target.select(); }
+
     return html`
       <div className="field">
         <label>${props.label}</label>
-        <input className="input" type=${type} value=${props.value} min="0"
+        <input className="input" type=${type} value=${text} min="0"
           placeholder=${props.placeholder || ''}
-          onChange=${function (e) {
-            props.onChange(type === 'text' ? e.target.value : (parseFloat(e.target.value) || 0));
-          }} />
+          onChange=${onChange} onFocus=${onFocus} />
       </div>`;
   }
 
